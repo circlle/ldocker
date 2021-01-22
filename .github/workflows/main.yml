@@ -2,8 +2,9 @@ name: CI to Docker Hub
   
 on: 
   push:
-    tags:
-      - "v*.*.*"
+    # tags:
+    #   - "v*.*.*"
+    branches: [ main ]
 
 jobs:
   build:
@@ -43,8 +44,10 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
-      
-      - name: Buildx name
-        run: echo ${{ steps.buildx.outputs.name }}
+      - name: Deploye to tencent ecs
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.TENCENT_SSH_HOST }}
+          username: ${{ secrets.TENCENT_SSH_USERNAME }}
+          key: ${{ secrets.TENCENT_SSH_KEY }}
+          script: docker run -dp 3000:3000 kxzhangdocker/ldocker:latest
