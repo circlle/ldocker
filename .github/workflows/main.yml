@@ -50,4 +50,4 @@ jobs:
           host: ${{ secrets.TENCENT_SSH_HOST }}
           username: ${{ secrets.TENCENT_SSH_USERNAME }}
           key: ${{ secrets.TENCENT_SSH_KEY }}
-          script: docker run -dp 3000:3000 kxzhangdocker/ldocker:latest
+          script: docker run -dp 80:8080 kxzhangdocker/ldocker:latest
