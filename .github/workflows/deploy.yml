@@ -1,13 +1,13 @@
-name: CI to Docker Hub
+name: Deploy
   
 on: 
   push:
-    # tags:
-    #   - "v*.*.*"
-    branches: [ main ]
+    tags:
+      - "v*.*.*"
+    # branches: [ main ]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
